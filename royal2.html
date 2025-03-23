@@ -6,6 +6,8 @@
     <title>Royal Private Safaris Limited</title>
     <script src="https://cdn.tailwindcss.com"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<link rel="preload" as="video" href="https://pub-44bc0a86abb04f59806e02591c1e58c3.r2.dev/wilderbeest3.m3u8" type="application/x-mpegURL">
+
 
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
     <style>
@@ -30,9 +32,11 @@
     
         <!-- Hero Section -->
     <header class="relative w-full h-[100vh] flex items-center justify-center text-white text-center px-6 overflow-hidden">
-        <video class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted playsinline>
-            <source src="wilderbeest3.mp4" type="video/mp4">
-        </video>
+       
+		
+		<video id="videoPlayer" class="absolute top-0 left-0 w-full h-full object-cover" autoplay loop muted playsinline>
+			Your browser does not support the video tag.
+		</video>
         <div class="absolute inset-0  opacity-20"></div>
         <div class="relative z-10 max-w-2xl">
             <h1 class="text-5xl md:text-6xl font-bold mb-4">Still Dreaming About Witnessing the Great Migration?</h1>
@@ -121,7 +125,7 @@
             <p class="text-gray-600 max-w-3xl mx-auto mb-12">All Inclusive, No Hidden Pricing. Limited Spots for 2025 – Book Now</p>
             <div class="grid md:grid-cols-3 gap-12">
                 <div class="relative group overflow-hidden rounded-xl shadow-lg">
-                    <img src="kibo.webp" alt="Fly Safari" class="w-full h-80 object-cover transform group-hover:scale-105 transition duration-500">
+                    <img src="Kibo.webp" alt="Fly Safari" class="w-full h-80 object-cover transform group-hover:scale-105 transition duration-500">
                     <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-6 text-white">
                         <h3 class="text-2xl font-semibold">9 day road/air safari</h3>
                         <p class="text-lg">$5500 Per Person</p>
@@ -230,6 +234,27 @@
         </div>
     </div>
     <script>
+	
+document.addEventListener("DOMContentLoaded", function() {
+    var video = document.getElementById("videoPlayer");
+    var videoSrc = "https://pub-44bc0a86abb04f59806e02591c1e58c3.r2.dev/wilderbeest3.m3u8"; // Replace with your actual .m3u8 URL
+
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+            video.play();
+        });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = videoSrc;
+        video.addEventListener('loadedmetadata', function() {
+            video.play();
+        });
+    }
+});
+	
+	
 	function showPopup(title, description, buttonCTA) {
     document.getElementById('popup-title').innerText = title;
     document.getElementById('popup-description').innerText = description;
@@ -273,6 +298,9 @@ function closePopup() {
         }
 
         startCountdown();
+		
+		
+
        
     </script>
 	
