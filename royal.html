@@ -307,7 +307,7 @@
         <div class="bg-white p-6 rounded-lg shadow-lg max-w-md text-center relative z-50">
             <h2 class="text-3xl font-semibold mb-4" id="popup-title">Witness the Great Wildebeest Migration</h2>
             <p class="text-gray-600 mb-4" id="popup-description">Interested in seeing the Great Wildebeest Migration? Just give us your details and a travel expert will be on hand within a business day, ready to answer all your questions.</p>
-            <form action="https://formspree.io/f/xldjbpop" method="post">
+            <form action="https://formspree.io/f/xldjbpop" method="post" id="contactForm">
                 <input type="text" name="name" placeholder="You Name" class="w-full p-3 mb-4 border rounded-lg">
                 <input type="email" name="email" placeholder="Your Email" class="w-full p-3 mb-4 border rounded-lg">
                 <input type="tel" name="tel" placeholder="Your Phone" class="w-full p-3 mb-4 border rounded-lg">
@@ -333,7 +333,13 @@ function gtag_report_conversion(url) {
   });
   return false;
 }
-
+document.getElementById('contactForm').addEventListener('submit', function() {
+    // Trigger the conversion event. This should run before the page navigates away.
+   gtag_report_conversion('https://signature.royalprivatesafaris.com/royal.html');
+    // Optionally, you can add a brief delay to help ensure the event is sent:
+    // event.preventDefault();
+    setTimeout(() => { this.submit(); }, 200);
+  });
 
 	function showPopup(title, description, buttonCTA) {
     document.getElementById('popup-title').innerText = title;
@@ -341,7 +347,7 @@ function gtag_report_conversion(url) {
 	document.getElementById('aboutfrm').innerText = title;
 	document.getElementById('submitCTA').innerText = buttonCTA;
     document.getElementById('popup').classList.remove('hidden');
-	gtag_report_conversion('https://signature.royalprivatesafaris.com/royal.html');
+	
 }
 
 function closePopup() {
