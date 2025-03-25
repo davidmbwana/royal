@@ -62,8 +62,8 @@
             Come see the most ICONIC wildlife spectacle
         </h1>
         <p class="text-lg md:text-xl mb-6">
-            1.5 MILLION Wilderbeests, Hundreds of thousands of herbivores, 
-            <b>UNCOUNTABLE CROCODILES</b>. What will happen?
+          (NEW 2025 SAFARI PACKAGE)  1.5 MILLION Wilderbeests, Hundreds of thousands of herbivores, 
+            <b>UNCOUNTABLE CROCODILES</b>. 
         </p>
         <div class="mt-6 flex justify-center">
 		
@@ -71,15 +71,86 @@
 
             <button class="px-8 py-3 text-white font-semibold rounded-lg shadow-md transition-transform transform hover:scale-105"
                 style="background-color: #D4AF37;"
-                onclick="showPopup('Book a Consultation', 'Our travel experts are ready, waiting to answer your questions.', 'Book a Consultation')">
+                onclick="showPopup('Get Safari Cost Estimate', 'Get cost estimate for 2025 Wilderbeest Migration Safari - Limited Spots', 'Get Estimate')">
                 Get Safari Cost Estimate
             </button>
         </div>
+		
+		
+		
     </div>
 </header>
 
 
+	<!--c-->
+	<section class="bg-gray-100 py-10 px-6 md:px-16 rounded-lg shadow-lg">
+  <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Get Your Personalized Safari Quote</h2>
+  <p class="text-center text-gray-600 mb-8">Fill in your details and receive customized safari packages within 10 minutes!</p>
 
+  <form id="safariQuoteForm" class="space-y-6" action="https://formspree.io/f/mkgjblqo" method="post">
+    <!-- Step 1: Basic Info -->
+    <div class="step" id="step1">
+      <label class="block text-gray-700 font-medium">When do you plan to travel?</label>
+      <select class="w-full p-3 border rounded-lg" name="travel_date">
+        <option>July – September (Great Migration Peak)</option>
+        <option>October – December</option>
+        <option>January – March</option>
+        <option>April – June </option>
+      </select>
+      
+      <label class="block text-gray-700 font-medium mt-4">How many travelers?</label>
+      <select class="w-full p-3 border rounded-lg" name="travelers">
+        <option>1-2</option>
+        <option>3-5</option>
+        <option>6+</option>
+      </select>
+
+      <label class="block text-gray-700 font-medium mt-4">Email Address</label>
+      <input type="email" class="w-full p-3 border rounded-lg" name="email" required>
+    </div>
+
+    <!-- Step 2: Experience Preferences -->
+    <div class="step hidden" id="step2">
+      <label class="block text-gray-700 font-medium">What type of safari do you prefer?</label>
+      <select class="w-full p-3 border rounded-lg" name="safari_type">
+        <option>Budget</option>
+        <option>Mid-Range</option>
+        <option>Luxury</option>
+      </select>
+
+
+      <label class="block text-gray-700 font-medium mt-4">What are your interests?</label>
+      <div class="grid grid-cols-2 gap-4">
+		<label><input type="checkbox" name="interests" value="Great Migration"> Great Migration</label>
+		<label><input type="checkbox" name="interests" value="Chimpanzee & Gorilla Trekking"> Chimpanzee & Gorilla Trekking</label>
+		<label><input type="checkbox" name="interests" value="Bird Watching"> Bird Watching</label>
+		<label><input type="checkbox" name="interests" value="Honeymoon Safari"> Honeymoon Safari</label>
+		<label><input type="checkbox" name="interests" value="Conservation & Eco-tourism"> Conservation & Eco-tourism</label>
+		<label><input type="checkbox" name="interests" value="Will Add More Later"> Will Add More Later</label>
+
+
+      </div>
+    </div>
+
+    
+
+    <!-- Step 4: Final Details -->
+    <div class="step hidden" id="step4">
+      <label class="block text-gray-700 font-medium">Phone Number (Optional)</label>
+      <input type="tel" class="w-full p-3 border rounded-lg" name="phone">
+
+      <label class="block text-gray-700 font-medium mt-4">Any special requests?</label>
+      <textarea class="w-full p-3 border rounded-lg" name="special_requests"></textarea>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex justify-between">
+      <button type="button" class="hidden px-6 py-2 bg-gray-500 text-white rounded-lg" id="prevStep">Back</button>
+      <button type="button" class="px-6 py-2 bg-blue-600 text-white rounded-lg" id="nextStep">Next</button>
+      <button type="submit" class="hidden px-6 py-2 bg-green-600 text-white rounded-lg" id="submitForm">Get Quote</button>
+    </div>
+  </form>
+</section>
 
 	<!-- Reviews Section -->
     <section class="bg-white py-12 px-6 text-center">
@@ -387,6 +458,47 @@ function closePopup() {
         });
     }
 });
+
+
+
+
+  let currentStep = 1;
+  const steps = document.querySelectorAll('.step');
+  const nextBtn = document.getElementById('nextStep');
+  const prevBtn = document.getElementById('prevStep');
+  const submitBtn = document.getElementById('submitForm');
+
+  function showStep(step) {
+    steps.forEach((el, index) => {
+      el.classList.toggle('hidden', index !== step - 1);
+    });
+    prevBtn.classList.toggle('hidden', step === 1);
+    nextBtn.classList.toggle('hidden', step === steps.length);
+    submitBtn.classList.toggle('hidden', step !== steps.length);
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (currentStep < steps.length) {
+      currentStep++;
+      showStep(currentStep);
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentStep > 1) {
+      currentStep--;
+      showStep(currentStep);
+    }
+  });
+
+  //document.getElementById('safariQuoteForm').addEventListener('submit', function(e) {
+  //  e.preventDefault();
+  //  alert('Form submitted! You will receive your quote soon.');
+ // });
+
+  showStep(currentStep);
+
+
        
     </script>
 	
